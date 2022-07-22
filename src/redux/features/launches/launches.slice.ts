@@ -30,10 +30,10 @@ export const { getLaunches, getLaunchesSuccess, getLaunchesFailure } = launchesS
 
 export const selectLaunches = (state: { launches: any; }) => state.launches;
 
-export const fetchLaunches = () => async (dispatch: any) => {
+export const fetchLaunches = (value: number) => async (dispatch: any) => {
     dispatch(getLaunches());
     try {
-        const response = await fetch('https://api.spacexdata.com/v3/launches');
+        const response = await fetch(`https://api.spacexdata.com/v3/launches?limit=${value}`);
         const data = await response.json();
         dispatch(getLaunchesSuccess(data));
     } catch (error) {
